@@ -6,7 +6,7 @@ import lombok.Data;
 public class Student {
     private Integer id;
     private Integer class_id;
-    private String number;
+    private String username;
     private String name;
     private String password;
     private String email;

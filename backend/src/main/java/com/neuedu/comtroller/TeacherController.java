@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/api/teacher")
+@CrossOrigin
 public class TeacherController {
     @Autowired
     private ITeacherService teacherService;
@@ -39,4 +40,5 @@ public class TeacherController {
     public R getById(@PathVariable Integer id) {
         return new R(true, teacherService.getById(id));
     }
+
 }

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/student")
+@CrossOrigin
 public class StudentController {
     @Autowired
     private IStudentService studentService;
