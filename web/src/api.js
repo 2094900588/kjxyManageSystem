@@ -1,6 +1,7 @@
 import Vue from 'vue'
 // import store from '@/store'
 import axios from 'axios'
+// import store from "../store"
 
 Vue.prototype.$http = axios
 // axios.defaults.baseURL = '/api'
@@ -8,10 +9,10 @@ axios.defaults.baseURL = 'http://localhost/api/'
 
 export default {
     // 管理员
-    getAdminList(params) {
+    getAdminList(params, token) {
         return ajax('admin/list', 'get', {
             params
-        })
+        }, token)
     },
     addAdmin(data) {
         return ajax("admin", "post", {
@@ -95,11 +96,14 @@ export default {
  * @param data post data, use for method put|post
  * @returns {Promise}
  */
-function ajax(url, method, options) {
+function ajax(url, method, options, token) {
     if (options !== undefined) {
         var { params = {}, data = {} } = options
     } else {
         params = data = {}
+    }
+    var headers = {
+        token: "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSiox099ANDXYNUtJRSq0oULIyNDO3MDUwNjS30FEqLU4t8kwBikGYIZUFqUBOLQD9U5f5PAAAAA.B2aniGJ8OiSVXPF7nIQNSYNhdiYzhtjQ7SSA8TDWonOVWObmneENKKxDsecikUIKW6G0WzynMy8JwcHBus48Vg"
     }
     // console.log(options)
     // console.log(params)
@@ -109,6 +113,7 @@ function ajax(url, method, options) {
             url,
             method,
             params,
+            headers,
             data
         }).then(res => {
             resolve(res)
@@ -128,6 +133,11 @@ function ajax(url, method, options) {
             }*/
         }, res => {
             // API请求异常，一般为Server error 或 network error
+            if (res.code === "ERR_NETWORK") {
+                this.$router.push("/admin")
+            }
+
+            console.log("用户未登录");
             reject(res)
             // Vue.prototype.$error(res.data.data)
         })

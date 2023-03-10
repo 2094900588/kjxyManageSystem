@@ -14,31 +14,58 @@
       <!-- 侧边栏 -->
       <!-- 侧边栏 -->
       <!-- 侧边栏 -->
-      <el-aside width="200px">
+      <el-aside width="200px" style="color: #fffbf0">
         <!-- 侧边栏菜单区域 -->
-        <el-menu background-color="#64707d">
-          <!-- 一级菜单 -->
-          <el-submenu index="1">
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+        >
+          <el-submenu index="1" class="change">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>管理员</span>
             </template>
-            <!-- 二级菜单 -->
-            <el-menu-item index="1-1">
-              <template slot="title">
-                <i class="el-icon-location"></i>
+            <el-menu-item-group>
+              <template slot="title">管理员列表</template>
+              <el-menu-item index="1-1">
                 <router-link to="/adminTP/adminlist">管理员列表</router-link>
-              </template>
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <router-link to="/adminTP/studentList">学生列表</router-link>
-              </template>
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <router-link to="/adminTP/teacherList">教师列表</router-link>
-              </template>
-            </el-menu-item>
+              </el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
+          <el-submenu index="2" class="change">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>学生</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">学生列表</template>
+              <el-menu-item index="1-0">
+                <router-link to="/adminTP/studentList">学生列表</router-link>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="3" class="change">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>教师</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">教师列表</template>
+              <el-menu-item index="1-.">
+                <router-link to="/adminTP/teacherList">教师列表</router-link>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-menu-item index="/demo" @click="goTo('/demo')">
+            <i class="el-icon-menu"></i>
+            <span slot="title">导航二</span>
+          </el-menu-item>
+          <el-menu-item index="/index" @click="goTo('/index')">
+            <i class="el-icon-setting"></i>
+            <span slot="title">导航三</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
 
@@ -71,7 +98,10 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
+.change {
+  margin-top: 10px;
+}
 .home-container {
   height: 100%;
 }
@@ -82,6 +112,7 @@ export default {
 
 .el-aside {
   background-color: #64707d;
+  opacity: 0.65;
 }
 
 .el-main {

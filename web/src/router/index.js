@@ -12,9 +12,9 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
-            component: Home
-        },
+            component: Home,
 
+        },
 
         {
             path: "/admin",
@@ -49,4 +49,36 @@ export default new VueRouter({
             ],
         },
     ]
+
 })
+
+
+// 导航守卫
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+// router.beforeEach((to, from, next) => {
+//     if (to.path === '/admin') {
+//         next();
+//     } else {
+//         let token = localStorage.getItem('Authorization');
+
+//         if (token === 'null' || token === '') {
+//             next('/admin');
+//         } else {
+//             next();
+//         }
+//     }
+// });
+// axios.interceptors.request.use(
+//     config => {
+//         if (localStorage.getItem('Authorization')) {
+//             config.headers.Authorization = localStorage.getItem('Authorization');
+//         }
+
+//         return config;
+//     },
+//     error => {
+//         return Promise.reject(error);
+//     });
+
+// localStorage.removeItem('Authorization');
+// this.$router.push('/admin');

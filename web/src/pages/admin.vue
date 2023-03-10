@@ -1,15 +1,23 @@
 <template>
-  <form action="" @click.prevent="login2">
+  <form action="" @click.prevent="login">
     <div class="box">
       <form autocomplete="off">
         <h2>管理员 登录</h2>
         <div class="inputBox">
-          <input type="text" required="required" v-model="username" />
+          <input
+            type="text"
+            required="required"
+            v-model.trim="loginForm.username"
+          />
           <span>UserName</span>
           <i></i>
         </div>
         <div class="inputBox">
-          <input type="password" required="required" v-model="password" />
+          <input
+            type="password"
+            required="required"
+            v-model.trim="loginForm.password"
+          />
           <span>Password</span>
           <i></i>
         </div>
@@ -24,27 +32,58 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import axios from "axios";
 export default {
   name: "adminName",
   data() {
     return {
-      username: "",
-      password: "",
-      // 校验数据是否合法
+      loginForm: { username: "", password: "", usertype: 1 },
     };
   },
   methods: {
-    login2() {
-      if (this.username === "admin" && this.password === "123456") {
-        this.$router.push("/adminTP");
+    ...mapMutations(["changeLogin"]),
+    login() {
+      let _this = this;
+      console.log(_this.loginForm);
+      if (this.username === "" || this.password === "") {
+        alert("账号或密码不能为空");
       } else {
+        axios({
+          method: "post",
+          url: "/user/login",
+          data: _this.loginForm,
+        }).then((res) => {
+          console.log(res.data);
+          _this.userToken = res.data.data;
+          console.log(_this.userToken);
+          // 将用户token保存到vuex中
+          _this.changeLogin({ Authorization: _this.userToken });
+          console.log(1);
+          _this.$router.push("/adminTP");
+          alert("登陆成功");
+        });
+        // .catch((error) => {
+        //   alert("账号或密码错误");
+        //   console.log(error);
+        // });
       }
     },
   },
+  //   async login() {
+  //     // 网络请求
+  //     let data = await login(this.username);
+  //     let token = data.token;
+  //     // 本地  vuex
+  //     this.$store.commit("LOGIN_IN", token);
+  //     this.$router.replace("/adminTP");
+  //   },
+  // },
+  // mounted() {},
 };
 </script>
 
-<style  scoped>
+<style scoped>
 /* 引入需要的字体 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 

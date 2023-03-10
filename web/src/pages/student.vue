@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 /* 引入需要的字体 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 

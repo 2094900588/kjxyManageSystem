@@ -111,7 +111,7 @@
 <script>
 import api from "@/api";
 
-import axios from "axios";
+// import axios from "axios";
 export default {
   name: "AdminList",
   data() {
@@ -146,7 +146,7 @@ export default {
       //     // console.log(res.data);
       //     this.dataList = res.data.data;
       //   });
-      api.getAdminList().then((res) => {
+      api.getAdminList(null).then((res) => {
         let resp = res.data;
         this.dataList = resp.data;
       });
@@ -276,7 +276,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   height: 1200px;
 }

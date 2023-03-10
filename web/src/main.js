@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import { Menu, Submenu, MenuItem } from 'element-ui'
 import jquery from "jquery";
+// import "./router/permission"
 
 Vue.prototype.$ = jquery;
 
