@@ -2,6 +2,7 @@ package com.neuedu.comtroller;
 
 import com.neuedu.comtroller.utils.R;
 import com.neuedu.entity.Admin;
+import com.neuedu.entity.User;
 import com.neuedu.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,24 +21,24 @@ public class AdminController {
         return new R(true, adminService.list());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public R save(@RequestBody Admin admin) throws IOException {
         boolean flag = adminService.save(admin);
         return new R(flag, flag ? "添加成功TvT" : "添加失败TnT");
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public R update(@RequestBody Admin admin) {
         return new R(adminService.updateById(admin));
     }
 
-    @DeleteMapping("{id}")
-    public R delete(@PathVariable Integer id) {
+    @GetMapping("/del")
+    public R delete(@RequestParam Integer id) {
         return new R(adminService.removeById(id));
     }
 
-    @GetMapping("{id}")
-    public R getById(@PathVariable Integer id) {
+    @GetMapping("/getinfo")
+    public R getById(@RequestParam Integer id) {
         return new R(true, adminService.getById(id));
     }
 }

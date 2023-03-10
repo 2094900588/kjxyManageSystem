@@ -1,12 +1,16 @@
 package com.neuedu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class Teacher {
-    private Integer id;
-    private Integer department_id;
-    private String number;
-    private String name;
-    private String password;
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("teacher1")
+public class Teacher extends User{
+//    private String id;
+//    private Integer userid;
+    private Integer departmentId;
 }

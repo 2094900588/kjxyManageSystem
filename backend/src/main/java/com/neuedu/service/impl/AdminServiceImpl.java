@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
     @Autowired
     private AdminMapper adminMapper;
+
     @Override
     public IPage<Admin> getPage2(int currentPage, int pageSize) {
         IPage page = new Page(currentPage, pageSize);
@@ -24,4 +25,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public IPage<Admin> getPage2(int currentPage, int pageSize, Admin classText) {
         return null;
     }
+
+
+
+
 }
